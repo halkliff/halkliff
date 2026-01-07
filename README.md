@@ -20,8 +20,10 @@ I am currently deep in the rabbit hole of **Game Engine Development**.
 * **The Status:** It hasn't achieved sentience yet, but the triangles are starting to look weird.
   > _And last I checked, the quaternions too._
 
-### 📂 The Archive: Machine Learning & Neural Network goodies
+### 📂 The Archive: Machine Learning & LLMOps goodies
 Before I started obsessing over game loops, I spent years talking to matrices.
+* **Time-space Continuum**: 8+ years of professional XP (11+ if you count the years I spent making the computer beep for fun)
+* **High-Level Quests:** Spearheaded tools and AI features for names like **Rivian**, using **Amazon Bedrock** and **GraphQL**.
 * **Past Obsession:** Training models to do things humans probably could have done faster, but with more **Python**.
 * **Transition:** I still love ML—now I'm just figuring out how to bake those "big brain" neural networks into real-time environments.
   > _Possibly the reason the triangles are looking weird, but oh well..._
@@ -30,7 +32,7 @@ Before I started obsessing over game loops, I spent years talking to matrices.
 
 ### 🐾 The "Real" Manager: My Shih-Tzu Cleo
 I am currently being supervised by a tiny, fluffy living paradox.
-* **High Energy:** Her `learning_rate` is set way too high. She zooms at 100fps.
+* **High Energy:** Her `learning_rate` is set way too high. She zooms at 1000fps.
 * **Low Bravery:** Terrified of her own shadow, the wind, and probably my code. She has a very high `false_positive` rate for "danger."
 * **Role:** Chief Emotional Support Officer & Professional Distractor.
   > If I don't commit code, I don't get to give treats. It's a strict management style.
@@ -38,18 +40,18 @@ I am currently being supervised by a tiny, fluffy living paradox.
 ---
 
 ### ☕ The "Hot" Take
-**Public Service Announcement:** I don'tt drink coffee. I am a software engineer powered entirely by 8 hours of sleep (ideally). It turns out you *can* understand **backpropagation** and **memory management** while being fully hydrated.
+**Public Service Announcement:** I don't drink coffee. I am a software engineer powered entirely by 8 hours of sleep (ideally). It turns out you *can* understand **backpropagation** and **memory management** while being fully hydrated.
 > No, I am not a robot (though my lack of caffeine dependency suggests otherwise). I’m powered by the satisfaction of a passing test suite and a very loud gaming keyboard.
-<!--
 
 ---
 
 ### 📊 Global Rankings (The Stable Edition)
 *These stats are powered by alternative servers that actually appreciate my lack of caffeine.*
 
-![Metrics](https://metrics.lecoq.io/halkliff?template=classic&base.header=0&base.activity=0&base.community=0&base.repositories=0&base.metadata=0&languages=1&languages.limit=8&languages.colors=github&languages.threshold=0%25)
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=halkliff&theme=ocean-dark&hide_border=true&mode=weekly)](https://git.io/streak-stats)
 
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=halkliff&theme=radical)
+<!--
+![Metrics](https://metrics.lecoq.io/halkliff?template=classic&base.header=0&base.activity=0&base.community=0&base.repositories=0&base.metadata=0&languages=1&languages.limit=8&languages.colors=github&languages.threshold=0%25)
 -->
 ---
 

@@ -48,7 +48,7 @@ I am currently being supervised by a tiny, fluffy living paradox.
 ### 📊 Global Rankings (The Stable Edition)
 <p align="center">
   <i>These stats are powered by alternative servers that actually appreciate my lack of caffeine.</i><br>
-  <a href="https://git.io/streak-stats"><img src="https://github-readme-streak-stats.herokuapp.com?user=halkliff&theme=ocean-dark&hide_border=true&mode=weekly" alt="GitHub Streak"/></a>  
+  <a href="https://git.io/streak-stats"><img src="https://github-readme-streak-stats.herokuapp.com?user=halkliff&theme=ocean-dark&hide_border=true&exclude_days=Sun%2CSat" alt="GitHub Streak"/></a>  
 </p>
 
 <!--

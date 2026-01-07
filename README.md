@@ -46,9 +46,10 @@ I am currently being supervised by a tiny, fluffy living paradox.
 ---
 
 ### 📊 Global Rankings (The Stable Edition)
-*These stats are powered by alternative servers that actually appreciate my lack of caffeine.*
-
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=halkliff&theme=ocean-dark&hide_border=true&mode=weekly)](https://git.io/streak-stats)
+<p align="center">
+  <i>These stats are powered by alternative servers that actually appreciate my lack of caffeine.</i><br>
+  <a href="https://git.io/streak-stats"><img src="https://github-readme-streak-stats.herokuapp.com?user=halkliff&theme=ocean-dark&hide_border=true&mode=weekly" alt="GitHub Streak"/></a>  
+</p>
 
 <!--
 ![Metrics](https://metrics.lecoq.io/halkliff?template=classic&base.header=0&base.activity=0&base.community=0&base.repositories=0&base.metadata=0&languages=1&languages.limit=8&languages.colors=github&languages.threshold=0%25)
@@ -64,9 +65,11 @@ I’m looking for a "Party" (a.k.a. a team) where I can:
 ---
 
 ### 📫 How to Summon Me
-* **GitHub:** You're already here! Go look at [toy-engine](https://github.com/halkliff/toy-engine).
-* **LinkedIn:** [https://linkedin.com/in/werberth-lins](https://linkedin.com/in/werberth-lins)
-* **Discord:** `halkliff#9753`
-* **Telegram**: [t.me/Halkie](https://t.me/Halkie)
+**[![Static Badge](https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=github&logoColor=%23FFFFFF)](https://github.com/halkliff)** <br>
+You're already here! Go look at [toy-engine](https://github.com/halkliff/toy-engine).
+
+**[![LinkedIn](https://img.shields.io/badge/in-LinkedIn-0a66c2?style=for-the-badge&labelColor=%230a66c2)](https://linkedin.com/in/werberth-lins)** 
+**[![Discord](https://img.shields.io/badge/Discord%3A%20HalkLiFF%239753-5865F2?style=for-the-badge&logo=discord&logoColor=%23FFFFFF)](https://discord.com/users/183677644414386176)** 
+**[![Telegram](https://img.shields.io/badge/Telegram%3A%20Halkie-%2326A5E4?style=for-the-badge&logo=telegram&logoColor=FFFFFF)](https://t.me/Halkie)**
 
 *"I’m proof that you can reach 120% CPU usage on water alone; mostly because I found a new game engine rabbit hole and my brain refuses to look away."*

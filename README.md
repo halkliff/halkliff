@@ -42,7 +42,7 @@ I am currently being supervised by a tiny, fluffy living paradox.
 ### ☕ The "Hot" Take
 **Public Service Announcement:** I don't drink coffee. I am a software engineer powered entirely by 8 hours of sleep (ideally). It turns out you *can* understand **backpropagation** and **memory management** while being fully hydrated.
 > No, I am not a robot (though my lack of caffeine dependency suggests otherwise). I’m powered by the satisfaction of a passing test suite and a very loud gaming keyboard.
-
+<!--
 ---
 
 ### 📊 Global Rankings (The Stable Edition)
@@ -51,7 +51,7 @@ I am currently being supervised by a tiny, fluffy living paradox.
   <a href="https://git.io/streak-stats"><img src="https://github-readme-streak-stats.herokuapp.com?user=halkliff&theme=ocean-dark&hide_border=true&exclude_days=Sun%2CSat" alt="GitHub Streak"/></a>  
 </p>
 
-<!--
+
 ![Metrics](https://metrics.lecoq.io/halkliff?template=classic&base.header=0&base.activity=0&base.community=0&base.repositories=0&base.metadata=0&languages=1&languages.limit=8&languages.colors=github&languages.threshold=0%25)
 -->
 ---

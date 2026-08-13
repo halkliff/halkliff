@@ -1,0 +1,76 @@
+.prose {
+  min-width: 0;
+}
+
+.prose :global(.prose-lead)::first-letter {
+  float: left;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 82px;
+  font-weight: 600;
+  line-height: 0.72;
+  margin: 15px 10px 0 0;
+}
+
+.prose :global(code) {
+  background: rgba(23, 25, 22, 0.07);
+  border: 1px solid rgba(23, 25, 22, 0.08);
+  border-radius: 3px;
+  font-family: var(--font-code);
+  font-size: 0.78em;
+  padding: 2px 5px;
+}
+
+.prose :global(pre) {
+  background: #171a17;
+  color: #e3e6dd;
+  font-family: var(--font-code);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.prose :global(pre code) {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.prose :global(pre.code-block) {
+  background: var(--syntax-surface) !important;
+  color: var(--shiki-light) !important;
+}
+
+.prose :global(pre.code-block span) {
+  color: var(--shiki-light);
+}
+
+:global(.dark) .prose :global(pre.code-block) {
+  background: var(--syntax-surface) !important;
+  color: var(--shiki-dark) !important;
+}
+
+:global(.dark) .prose :global(pre.code-block span) {
+  color: var(--shiki-dark);
+}
+
+.prose :global(blockquote) {
+  border-bottom: 1px solid var(--ink);
+  border-top: 1px solid var(--ink);
+}
+
+.prose :global(ul) {
+  list-style: none;
+}
+
+.prose :global(li) {
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+
+.prose :global(li)::before {
+  content: "↳";
+  font-family: var(--font-mono);
+  left: 0;
+  position: absolute;
+}

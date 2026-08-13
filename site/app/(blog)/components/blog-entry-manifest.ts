@@ -2,5 +2,5 @@
 import { post as post01 } from "../blog/(entries)/(01_memory-layout-for-react-devs)/memory-layout-for-react-devs/page";
 
 export const blogEntries = [
-  { directory: "(01_memory-layout-for-react-devs)", post: post01 },
+  { directory: "(01_memory-layout-for-react-devs)", publicSlug: "memory-layout-for-react-devs", post: post01 },
 ] as const;

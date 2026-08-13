@@ -17,6 +17,7 @@ export interface FieldNote {
 
 function loadFieldNote({
   directory: directoryName,
+  publicSlug,
   post: metadata,
 }: (typeof blogEntries)[number]): FieldNote {
   const expectedDirectoryName = `(${String(metadata.order).padStart(2, "0")}_${metadata.slug})`;
@@ -26,9 +27,15 @@ function loadFieldNote({
     );
   }
 
+  if (publicSlug !== metadata.slug) {
+    throw new Error(
+      `Field note route ${publicSlug} does not match its exported slug ${metadata.slug}.`,
+    );
+  }
+
   return {
     ...metadata,
-    slug: `/blog/${metadata.slug}`,
+    slug: `/blog/${publicSlug}`,
   };
 }
 

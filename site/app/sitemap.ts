@@ -6,8 +6,9 @@ const siteLastModified = new Date("2026-07-30T00:00:00.000Z");
 
 /** Routes that should be discoverable by search engines.
  *
- * The field-note entries are the same registry used by the index and entry
- * pages, so adding a post adds its sitemap URL without another hardcoded list.
+ * The field-note entries are the same generated registry used by the index.
+ * Its public paths come from the nested route directories, while numbered
+ * route groups remain an implementation-only ordering mechanism.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

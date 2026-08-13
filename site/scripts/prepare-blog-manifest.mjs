@@ -53,7 +53,7 @@ const groups = getDirectories(entriesDirectory)
       importPath = `./${importPath}`;
     }
 
-    return { directory, importPath, order };
+    return { directory, importPath, order, publicSlug };
   })
   .sort((a, b) => a.order - b.order);
 
@@ -73,8 +73,8 @@ const imports = groups
   .join("\n");
 const entries = groups
   .map(
-    ({ directory, order }) =>
-      `  { directory: ${JSON.stringify(directory)}, post: post${String(order).padStart(2, "0")} },`,
+    ({ directory, order, publicSlug }) =>
+      `  { directory: ${JSON.stringify(directory)}, publicSlug: ${JSON.stringify(publicSlug)}, post: post${String(order).padStart(2, "0")} },`,
   )
   .join("\n");
 

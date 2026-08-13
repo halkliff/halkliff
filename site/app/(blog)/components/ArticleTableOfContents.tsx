@@ -18,7 +18,7 @@ export function ArticleTableOfContents({
   return (
     <aside
       aria-label="On this page"
-      className="sticky top-[110px] flex w-[180px] self-start flex-col gap-[11px] max-md:hidden"
+      className="sticky top-[110px] hidden w-full self-start flex-col gap-[11px] md:flex"
     >
       <Typography
         as="span"

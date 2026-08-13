@@ -26,6 +26,9 @@ function MarkdownCode({
 }
 
 const markdownComponents: MDXComponents = {
+  p: (props: ComponentProps<"p">) => (
+    <Typography as="p" variant="articleBody" {...props} />
+  ),
   h1: (props: ComponentProps<"h1">) => (
     <Typography as="h1" variant="h1" {...props} />
   ),
@@ -42,7 +45,12 @@ const markdownComponents: MDXComponents = {
     <Typography as="blockquote" variant="blockquote" {...props} />
   ),
   ul: (props: ComponentProps<"ul">) => (
-    <Typography as="ul" variant="list" {...props} />
+    <Typography
+      as="ul"
+      className="my-6 ml-6 list-disc [&>li]:mt-2"
+      variant="articleBody"
+      {...props}
+    />
   ),
   pre: StaticCodeBlock,
   code: MarkdownCode,

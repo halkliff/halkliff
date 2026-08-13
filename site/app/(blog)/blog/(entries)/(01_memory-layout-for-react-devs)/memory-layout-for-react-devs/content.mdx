@@ -18,8 +18,8 @@ _fields_ = [("tag", c_uint8), ("value", c_uint32)]
 print(f"payload: 5 bytes, aligned size: {sizeof(Packet)} bytes")`;
 
 <Typography
-  as="p"
-  className="prose-lead"
+  as="div"
+  className="prose-lead [&>p]:m-0 [&>p]:text-xl [&>p]:leading-relaxed [&>p]:text-muted-foreground"
   variant="articleLead"
 >
   JavaScript does an excellent job of letting you forget that memory exists.
@@ -27,12 +27,10 @@ print(f"payload: 5 bytes, aligned size: {sizeof(Packet)} bytes")`;
   turned the lights on in a messy storage room.
 </Typography>
 
-<Typography variant="articleBody">
-  In React, you manipulate values: objects, arrays, props, state. You care about
-  their identity and shape, but rarely their physical location. Underneath,
-  every value eventually becomes bytes stored at addresses. Systems languages
-  simply make that layer part of the conversation.
-</Typography>
+In React, you manipulate values: objects, arrays, props, state. You care about
+their identity and shape, but rarely their physical location. Underneath, every
+value eventually becomes bytes stored at addresses. Systems languages simply
+make that layer part of the conversation.
 
 <ArticleHeading
   id="abstraction"
@@ -41,10 +39,8 @@ print(f"payload: 5 bytes, aligned size: {sizeof(Packet)} bytes")`;
   The useful lie
 </ArticleHeading>
 
-<Typography variant="articleBody">
-  Consider a familiar list. In JavaScript, the interesting question is usually:
-  *what are its values?*
-</Typography>
+Consider a familiar list. In JavaScript, the interesting question is usually:
+*what are its values?*
 
 ```ts
 const temperatures = [18, 21, 23, 19];
@@ -57,36 +53,16 @@ const temperatures = [18, 21, 23, 19];
   initialSource={temperaturesNotebook}
 />
 
-<Typography variant="articleBody">
-  In Rust, the type gives us another useful fact.{' '}
-  <Typography
-    as="code"
-    variant="articleCode"
-  >
-    [u16; 4]
-  </Typography>{' '}
-  tells us there are four elements and every element consumes two bytes. The
-  payload is eight consecutive bytes—no detective work required.
-</Typography>
+In Rust, the type gives us another useful fact. `[u16; 4]` tells us there are
+four elements and every element consumes two bytes. The payload is eight
+consecutive bytes—no detective work required.
 
 <ArticleAlert
   title="The bridge"
   variant="info"
 >
-  <Typography
-    as="span"
-    className="text-base leading-relaxed"
-    variant="articleBody"
-  >
-    A React element describes what should exist. A type like{' '}
-    <Typography
-      as="code"
-      variant="articleCode"
-    >
-      [u16; 4]
-    </Typography>{' '}
-    also describes how its data can exist in memory.
-  </Typography>
+  A React element describes what should exist. A type like `[u16; 4]` also
+  describes how its data can exist in memory.
 </ArticleAlert>
 
 <ArticleHeading
@@ -96,34 +72,16 @@ const temperatures = [18, 21, 23, 19];
   Contiguous means close
 </ArticleHeading>
 
-<Typography variant="articleBody">
-  An array’s elements sit next to each other. If the first byte starts at
-  address{' '}
-  <Typography
-    as="code"
-    variant="articleCode"
-  >
-    0x1000
-  </Typography>
-  , the next byte is at{' '}
-  <Typography
-    as="code"
-    variant="articleCode"
-  >
-    0x1001
-  </Typography>
-  . That sounds almost too obvious to mention. It is, however, the foundation of
-  fast iteration and predictable access.
-</Typography>
+An array’s elements sit next to each other. If the first byte starts at address
+`0x1000`, the next byte is at `0x1001`. That sounds almost too obvious to
+mention. It is, however, the foundation of fast iteration and predictable
+access.
 
 <MemoryInspector />
 
-<Typography variant="articleBody">
-  The processor benefits because fetching one location often brings nearby data
-  into cache. Walking a compact array is like reading books arranged on one
-  shelf. Chasing pointers is more like following a scavenger hunt across the
-  library.
-</Typography>
+The processor benefits because fetching one location often brings nearby data
+into cache. Walking a compact array is like reading books arranged on one shelf.
+Chasing pointers is more like following a scavenger hunt across the library.
 
 <ArticleHeading
   id="alignment"
@@ -132,17 +90,9 @@ const temperatures = [18, 21, 23, 19];
   Alignment: the invisible grid
 </ArticleHeading>
 
-<Typography variant="articleBody">
-  Many values prefer addresses divisible by a particular number. A{' '}
-  <Typography
-    as="code"
-    variant="articleCode"
-  >
-    u32
-  </Typography>
-  , for example, typically wants a four-byte boundary. When fields do not line
-  up, the compiler may insert unused bytes called **padding**.
-</Typography>
+Many values prefer addresses divisible by a particular number. A `u32`, for
+example, typically wants a four-byte boundary. When fields do not line up, the
+compiler may insert unused bytes called **padding**.
 
 <AlignmentDiagram />
 
@@ -153,12 +103,10 @@ const temperatures = [18, 21, 23, 19];
   initialSource={alignmentNotebook}
 />
 
-<Typography variant="articleBody">
-  This is not waste caused by a lazy compiler. Alignment lets the machine read
-  values efficiently and, on some architectures, safely. Rearranging fields can
-  sometimes reduce padding—but doing so blindly can make an API worse to save a
-  handful of bytes.
-</Typography>
+This is not waste caused by a lazy compiler. Alignment lets the machine read
+values efficiently and, on some architectures, safely. Rearranging fields can
+sometimes reduce padding—but doing so blindly can make an API worse to save a
+handful of bytes.
 
 <Typography
   as="blockquote"
@@ -175,49 +123,17 @@ const temperatures = [18, 21, 23, 19];
   Back to React
 </ArticleHeading>
 
-<Typography variant="articleBody">
-  None of this means you should start estimating object padding during a code
-  review. It gives you a sharper model for the moments where JavaScript touches
-  a lower layer:
-</Typography>
+None of this means you should start estimating object padding during a code
+review. It gives you a sharper model for the moments where JavaScript touches a
+lower layer:
 
-<Typography
-  as="ul"
-  variant="articleBody"
->
-  <li>
-    <Typography
-      as="strong"
-      variant="articleBody"
-    >
-      Typed arrays
-    </Typography>{' '}
-    make element size and contiguous storage explicit.
-  </li>
-  <li>
-    <Typography
-      as="strong"
-      variant="articleBody"
-    >
-      GPU buffers
-    </Typography>{' '}
-    demand exact layouts because shaders cannot guess what your objects meant.
-  </li>
-  <li>
-    <Typography
-      as="strong"
-      variant="articleBody"
-    >
-      Serialization
-    </Typography>{' '}
-    turns friendly values into a byte contract another system can understand.
-  </li>
-</Typography>
+- **Typed arrays** make element size and contiguous storage explicit.
+- **GPU buffers** demand exact layouts because shaders cannot guess what your
+  objects meant.
+- **Serialization** turns friendly values into a byte contract another system
+  can understand.
 
-<Typography variant="articleBody">
-  React and Rust are not rival worldviews. They are tools working at different
-  distances from the machine. Learning the lower layer does not make the upper
-  one less valuable. It makes the abstraction visible—and therefore easier to
-  trust.
-</Typography>
+React and Rust are not rival worldviews. They are tools working at different
+distances from the machine. Learning the lower layer does not make the upper one
+less valuable. It makes the abstraction visible—and therefore easier to trust.
 ````

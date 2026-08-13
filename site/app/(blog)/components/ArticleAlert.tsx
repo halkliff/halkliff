@@ -40,7 +40,10 @@ export function ArticleAlert({
 
   return (
     <Alert
-      className={cn("my-11 font-[family-name:var(--font-sans)]", className)}
+      className={cn(
+        "my-11 font-[family-name:var(--font-sans)] [&_[data-slot=alert-description]>p]:text-base [&_[data-slot=alert-description]>p]:leading-relaxed",
+        className,
+      )}
       variant={variant}
     >
       <Icon aria-hidden="true" />

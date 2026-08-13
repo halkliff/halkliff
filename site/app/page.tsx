@@ -188,11 +188,11 @@ export default function Home() {
       <section
         aria-labelledby="hero-title"
         className={cn(
-          'hero relative mx-auto grid w-full max-w-[1600px] grid-cols-[90px_minmax(0,1fr)_320px] overflow-hidden px-[clamp(20px,4vw,64px)] pb-25 pt-[clamp(70px,9vw,132px)] lg:min-h-0 lg:grid-cols-[80px_minmax(0,1080px)_360px] lg:gap-x-10 lg:px-0 lg:pb-28 lg:pt-32 max-lg:grid-cols-[60px_minmax(0,1fr)] max-md:blockmax-md:px-5 max-md:pb-22.5 max-md:pt-19',
+          'hero relative mx-auto grid w-full max-w-[1600px] grid-cols-[90px_minmax(0,1fr)_320px] overflow-hidden px-[clamp(20px,4vw,64px)] pb-25 pt-[clamp(70px,9vw,132px)] lg:min-h-0 lg:grid-cols-[80px_minmax(0,1080px)_360px] lg:gap-x-10 lg:px-0 lg:pb-28 lg:pt-32 max-lg:grid-cols-[60px_minmax(0,1fr)] max-md:block max-md:px-5 max-md:pb-22.5 max-md:pt-19',
           pageStyles.hero,
         )}
       >
-        <ContentFrame className="pointer-events-none absolute inset-x-0 top-6 z-6 flex justify-end px-[clamp(20px,4vw,64px)] lg:max-w-[1600px] lg:px-0 max-md:top-4 max-md:px-5">
+        <ContentFrame className="pointer-events-none absolute inset-x-0 top-6 z-6 flex justify-end px-[clamp(20px,4vw,64px)] lg:max-w-[1600px] max-md:top-4 max-md:px-5">
           <AppearanceControls
             className="pointer-events-auto"
             labelClassName="max-md:hidden"
@@ -206,7 +206,7 @@ export default function Home() {
           00. ABOUT
         </div>
         <div className="hero-copy relative z-1 col-start-2 row-start-1 max-w-220 lg:max-w-[1080px] max-md:max-w-none">
-          <figure className="absolute -right-72 top-3 z-2 m-0 h-82 w-62 overflow-hidden border border-[color-mix(in_srgb,var(--acid)_55%,var(--line))] bg-(--paper) [clip-path:polygon(7%_0,100%_4%,94%_92%,18%_100%,0_74%)] after:pointer-events-none after:absolute after:inset-2.5 after:border after:border-[rgba(255,255,255,0.42)] lg:right-[-300px] lg:h-92 lg:w-70 max-lg:right-0 max-lg:top-7 max-lg:h-62 max-lg:w-45 max-md:relative max-md:right-auto max-md:top-auto [@media(min-width:480px)_and_(max-width:760px)]:-mb-12 max-[480px]:mb-8 max-md:ml-auto max-md:h-64 max-md:w-[62%] max-md:max-w-56">
+          <figure className="absolute -right-72 top-3 z-2 m-0 h-82 w-62 overflow-hidden border border-[color-mix(in_srgb,var(--acid)_55%,var(--line))] bg-(--paper) [clip-path:polygon(7%_0,100%_4%,94%_92%,18%_100%,0_74%)] after:pointer-events-none after:absolute after:inset-2.5 after:border after:border-[rgba(255,255,255,0.42)] lg:right-[-300px] lg:h-92 lg:w-70 max-lg:right-0 max-lg:top-7 max-lg:h-64 max-lg:w-52 max-md:relative max-md:right-auto max-md:top-auto [@media(min-width:500px)_and_(max-width:760px)]:-mb-12 max-[500px]:mb-8 max-md:ml-auto max-md:h-70 max-md:w-[62%] max-md:max-w-60">
             <Image
               className="block size-full object-cover [object-position:50%_34%]"
               alt="A photography depicting Werberth, the author of this website, in a casual pose with a blurred background. The image is cropped to focus on the upper body and face, highlighting a friendly and approachable demeanor."

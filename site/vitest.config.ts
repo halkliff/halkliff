@@ -20,6 +20,7 @@ export default defineConfig({
       "tests/memory-inspector.test.tsx",
       "tests/code-notebook-component.test.tsx",
       "tests/appearance-controls.test.tsx",
+      "tests/mdx-components.test.tsx",
     ],
     setupFiles: ["./tests/setup.ts"],
   },

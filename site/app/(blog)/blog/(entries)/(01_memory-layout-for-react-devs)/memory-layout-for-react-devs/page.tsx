@@ -147,7 +147,7 @@ export default function MemoryLayoutArticle() {
       <article>
         <header>
           <ContentFrame
-            className="border-b border-[var(--line)] px-[clamp(20px,4vw,62px)] pt-[clamp(82px,10vw,148px)] pb-14"
+            className="border-b border-(--line) px-[clamp(20px,4vw,62px)] pt-[clamp(82px,10vw,148px)] pb-14"
             size="blog"
           >
             <Typography
@@ -167,7 +167,7 @@ export default function MemoryLayoutArticle() {
               {post.title}
             </Typography>
             <Typography
-              className="m-0 max-w-[860px] text-[clamp(20px,2.2vw,30px)] leading-[1.45] text-[var(--muted)] lg:max-w-[1040px] lg:text-[34px]"
+              className="m-0 max-w-[860px] text-[clamp(20px,2.2vw,30px)] leading-[1.45] text-muted lg:max-w-[1040px] lg:text-[34px]"
               variant="articleDeck"
             >
               You already understand trees, identity, and expensive updates.
@@ -175,8 +175,8 @@ export default function MemoryLayoutArticle() {
               bytes, alignment, and one surprisingly useful lie.
             </Typography>
             <div className="mt-10 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-6">
-              <div className="flex items-center gap-[13px]">
-                <span className="block h-[38px] w-[38px] overflow-hidden rounded-full border border-[var(--line)]">
+              <div className="flex items-center gap-3">
+                <span className="block h-9 w-9 overflow-hidden rounded-full border border-(--line)">
                   <Image
                     alt="Werberth Lins"
                     className="h-full w-full object-cover"
@@ -199,7 +199,7 @@ export default function MemoryLayoutArticle() {
                   </Typography>
                   <Typography
                     as="span"
-                    className="mt-1 block text-[8px] text-[var(--muted)]"
+                    className="mt-1 block text-[8px] text-muted"
                     variant="articleMeta"
                   >
                     Lead SWE · Web to systems
@@ -221,7 +221,7 @@ export default function MemoryLayoutArticle() {
                 </Typography>
                 <Typography
                   as="span"
-                  className="bg-[var(--acid)] px-[7px] py-[5px]"
+                  className="bg-(--acid) px-2 py-1"
                   variant="codeLabel"
                 >
                   {post.status}
@@ -242,14 +242,14 @@ export default function MemoryLayoutArticle() {
         </header>
 
         <ContentFrame
-          className="grid grid-cols-[180px_minmax(0,730px)_180px] justify-center gap-10 px-[clamp(20px,4vw,62px)] pt-16 pb-24 lg:grid-cols-[180px_minmax(0,820px)_180px] lg:gap-20 lg:px-0 max-md:block max-md:pt-12"
+          className="grid grid-cols-1 px-5 pt-12 pb-24 md:grid-cols-[150px_minmax(0,1fr)_minmax(0,1fr)] md:gap-8 md:px-8 md:pt-16 xl:grid-cols-[180px_minmax(0,1fr)_minmax(0,1fr)] xl:gap-12 xl:px-10 2xl:grid-cols-[180px_minmax(0,820px)_180px] 2xl:justify-center"
           size="article"
         >
           <ArticleTableOfContents items={tableOfContents} />
 
           <div
             className={cn(
-              'prose col-start-2 min-w-0 text-[18px] leading-[1.82] text-[var(--ink)] [&>blockquote]:my-12 [&>blockquote]:-mx-10 [&>blockquote]:py-10 [&>blockquote]:leading-[1.25] [&>p]:mb-8 [&>p:last-child]:mb-0 [&>pre]:my-10 [&>pre]:p-8 [&>ul]:my-9 [&>ul]:p-0 [&_li]:py-3 [&_li]:pl-6 max-md:col-auto max-md:text-[17px] max-md:[&>blockquote]:mx-0',
+              'prose min-w-0 text-[17px] leading-[1.82] text-(--ink) md:col-start-2 md:col-end-4 md:text-[18px] 2xl:col-end-3 [&>blockquote]:my-12 [&>blockquote]:-mx-10 [&>blockquote]:py-10 [&>blockquote]:leading-tight [&>p]:mb-8 [&>p:last-child]:mb-0 [&>pre]:my-10 [&>pre]:p-8 [&>ul]:my-9 [&>ul]:p-0 [&_li]:py-3 [&_li]:pl-6 max-md:[&>blockquote]:mx-0',
               styles.prose,
             )}
           >

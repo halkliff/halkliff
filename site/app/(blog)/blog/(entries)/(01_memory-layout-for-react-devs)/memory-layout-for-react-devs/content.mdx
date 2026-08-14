@@ -39,8 +39,8 @@ make that layer part of the conversation.
   The useful lie
 </ArticleHeading>
 
-Consider a familiar list. In JavaScript, the interesting question is usually:
-*what are its values?*
+Consider a familiar list. In JavaScript, the interesting question is usually:<br />
+_what are its values?_
 
 ```ts
 const temperatures = [18, 21, 23, 19];
@@ -52,6 +52,8 @@ const temperatures = [18, 21, 23, 19];
   language="typescript"
   initialSource={temperaturesNotebook}
 />
+
+<br />
 
 In Rust, the type gives us another useful fact. `[u16; 4]` tells us there are
 four elements and every element consumes two bytes. The payload is eight
@@ -72,7 +74,7 @@ consecutive bytes—no detective work required.
   Contiguous means close
 </ArticleHeading>
 
-An array’s elements sit next to each other. If the first byte starts at address
+An array's elements sit next to each other. If the first byte starts at address
 `0x1000`, the next byte is at `0x1001`. That sounds almost too obvious to
 mention. It is, however, the foundation of fast iteration and predictable
 access.
@@ -136,4 +138,3 @@ lower layer:
 React and Rust are not rival worldviews. They are tools working at different
 distances from the machine. Learning the lower layer does not make the upper one
 less valuable. It makes the abstraction visible—and therefore easier to trust.
-````

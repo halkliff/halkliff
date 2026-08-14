@@ -40,6 +40,14 @@ type TerminalEntry = {
   tone?: 'normal' | 'error';
 };
 
+/** Server-derived field-note data kept deliberately plain for this client island. */
+export type WorkbenchQuickOpenNote = {
+  order: number;
+  readingTime: string;
+  slug: string;
+  title: string;
+};
+
 const branchStates = [
   {
     name: 'main*',
@@ -228,7 +236,11 @@ function DiagnosticsPanel({ className }: { className?: string }) {
   );
 }
 
-export function Workbench() {
+export function Workbench({
+  quickOpenNotes,
+}: {
+  quickOpenNotes: readonly WorkbenchQuickOpenNote[];
+}) {
   const [tab, setTab] = useState<Tab>('profile');
   const [bytes, setBytes] = useState(16);
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -248,6 +260,7 @@ export function Workbench() {
     x: number;
     y: number;
   } | null>(null);
+  const firstFieldNote = quickOpenNotes[0];
 
   useEffect(() => {
     const terminalBody = terminalBodyRef.current;
@@ -539,18 +552,20 @@ export function Workbench() {
                 allocation.rs
               </Typography>
             </button>
-            <Link
-              className={cn(railItemClass(false), 'max-md:hidden')}
-              href="/blog/memory-layout-for-react-devs"
-            >
-              <span className="inline-block size-[7px] shrink-0 rounded-[2px] bg-[var(--mint)]" />
-              <Typography
-                as="span"
-                variant="codeLabel"
+            {firstFieldNote ? (
+              <Link
+                className={cn(railItemClass(false), 'max-md:hidden')}
+                href={firstFieldNote.slug}
               >
-                notes.md
-              </Typography>
-            </Link>
+                <span className="inline-block size-[7px] shrink-0 rounded-[2px] bg-[var(--mint)]" />
+                <Typography
+                  as="span"
+                  variant="codeLabel"
+                >
+                  notes.md
+                </Typography>
+              </Link>
+            ) : null}
             <div className="flex-1 max-md:hidden" />
             {branchMessage && (
               <Typography
@@ -1014,21 +1029,36 @@ export function Workbench() {
             >
               QUICK OPEN
             </Typography>
-            <Link
-              className="grid grid-cols-[24px_1fr_auto] items-center gap-3 px-[10px] py-3 font-[var(--font-mono)] text-[10px] hover:bg-[#292e29]"
-              href="/blog/memory-layout-for-react-devs"
-            >
-              <span className="text-[#676e64]">01</span>
-              <Typography
-                as="strong"
-                variant="codeLabel"
+            {quickOpenNotes.map((note) => (
+              <Link
+                className="grid grid-cols-[24px_1fr_auto] items-center gap-3 px-[10px] py-3 font-[var(--font-mono)] text-[10px] hover:bg-[#292e29]"
+                href={note.slug}
+                key={note.slug}
               >
-                Read: Memory layout for React devs
-              </Typography>
-              <Kbd className="rounded-none border-[#454b43] bg-[#2a2e2a] px-[5px] py-[3px] font-[var(--font-mono)] text-[8px] text-[#a8ada4]">
-                ↵
-              </Kbd>
-            </Link>
+                <span className="text-[#676e64]">
+                  {String(note.order).padStart(2, '0')}
+                </span>
+                <span className="min-w-0">
+                  <Typography
+                    as="strong"
+                    className="block truncate"
+                    variant="codeLabel"
+                  >
+                    Read: {note.title}
+                  </Typography>
+                  <Typography
+                    as="span"
+                    className="mt-1 block text-[8px] tracking-[0.1em] text-[#8d948a] uppercase"
+                    variant="codeLabel"
+                  >
+                    {note.readingTime}
+                  </Typography>
+                </span>
+                <Kbd className="rounded-none border-[#454b43] bg-[#2a2e2a] px-[5px] py-[3px] font-[var(--font-mono)] text-[8px] text-[#a8ada4]">
+                  ↵
+                </Kbd>
+              </Link>
+            ))}
             <a
               className="grid grid-cols-[24px_1fr_auto] items-center gap-3 px-[10px] py-3 font-[var(--font-mono)] text-[10px] hover:bg-[#292e29]"
               href="https://github.com/halkliff"

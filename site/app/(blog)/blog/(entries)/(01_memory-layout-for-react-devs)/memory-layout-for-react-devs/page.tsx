@@ -1,9 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { ContentFrame } from '@/app/components/site/ContentFrame';
-import { Typography } from '@/app/components/ui/typography';
+import { ArticleHeader } from '@/app/(blog)/components/ArticleHeader';
 import { ArticleNextNavigation } from '@/app/(blog)/components/ArticleNextNavigation';
 import { ArticleTableOfContents } from '@/app/(blog)/components/ArticleTableOfContents';
 import { ArticleAlert } from '@/app/(blog)/components/ArticleAlert';
@@ -136,7 +135,21 @@ const structuredData = {
   'isAccessibleForFree': true,
 };
 
-export default function MemoryLayoutArticle() {
+export default async function MemoryLayoutArticle() {
+  // The generated manifest imports this page's `post` export. Loading it only
+  // after this module has initialized preserves the single-page metadata model
+  // while still giving article navigation the canonical published-note order.
+  const { getFieldNoteNavigation, toFieldNoteLink } = await import(
+    '@/app/(blog)/components/field-notes'
+  );
+  const { previous, next } = getFieldNoteNavigation(post.slug);
+  const previousNavigation = previous
+    ? { ...toFieldNoteLink(previous), href: previous.slug }
+    : undefined;
+  const nextNavigation = next
+    ? { ...toFieldNoteLink(next), href: next.slug }
+    : undefined;
+
   return (
     <>
       <script
@@ -145,91 +158,41 @@ export default function MemoryLayoutArticle() {
       />
 
       <article>
-        <header>
-          <ContentFrame
-            className="border-b border-(--line) px-[clamp(20px,4vw,62px)] pt-[clamp(82px,10vw,148px)] pb-14"
-            size="blog"
-          >
-            <Typography
-              as="div"
-              className="flex items-center gap-2.5 text-[9px] tracking-[0.11em] uppercase"
-              variant="codeLabel"
-            >
-              <span>FIELD NOTE {String(post.order).padStart(2, '0')}</span>
-              <i className="block h-px w-[30px] bg-[var(--ink)]" />
-              <span>MEMORY</span>
-            </Typography>
-            <Typography
-              as="h1"
-              className="my-10 max-w-[1030px] text-[clamp(54px,8vw,118px)] font-[540] leading-[0.88] tracking-[-0.075em] lg:max-w-[1320px] lg:text-[clamp(118px,5.8vw,138px)]"
-              variant="articleDisplay"
-            >
-              {post.title}
-            </Typography>
-            <Typography
-              className="m-0 max-w-[860px] text-[clamp(20px,2.2vw,30px)] leading-[1.45] text-muted lg:max-w-[1040px] lg:text-[34px]"
-              variant="articleDeck"
-            >
-              You already understand trees, identity, and expensive updates.
-              Let’s use that intuition to see what a computer sees: addresses,
-              bytes, alignment, and one surprisingly useful lie.
-            </Typography>
-            <div className="mt-10 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-6">
-              <div className="flex items-center gap-3">
-                <span className="block h-9 w-9 overflow-hidden rounded-full border border-(--line)">
-                  <Image
-                    alt="Werberth Lins"
-                    className="h-full w-full object-cover"
-                    height={38}
-                    src="/profile-photo.webp"
-                    width={38}
-                  />
-                </span>
-                <Typography
-                  as="p"
-                  className="m-0"
-                  variant="articleByline"
-                >
-                  <Typography
-                    as="strong"
-                    className="block text-[12px]"
-                    variant="articleByline"
-                  >
-                    Werberth Lins
-                  </Typography>
-                  <Typography
-                    as="span"
-                    className="mt-1 block text-[8px] text-muted"
-                    variant="articleMeta"
-                  >
-                    Lead SWE · Web to systems
-                  </Typography>
-                </Typography>
-              </div>
-              <div className="flex items-center gap-6 text-[8px] tracking-[0.08em] max-md:flex-wrap max-md:gap-3">
-                <Typography
-                  as="span"
-                  variant="articleMeta"
-                >
-                  {post.date}
-                </Typography>
-                <Typography
-                  as="span"
-                  variant="articleMeta"
-                >
-                  {post.readingTime}
-                </Typography>
-                <Typography
-                  as="span"
-                  className="bg-(--acid) px-2 py-1"
-                  variant="codeLabel"
-                >
-                  {post.status}
-                </Typography>
-              </div>
-            </div>
+        <ArticleHeader>
+          <ArticleHeader.Eyebrow>
+            <span>FIELD NOTE {String(post.order).padStart(2, '0')}</span>
+            <ArticleHeader.Divider />
+            <span>MEMORY</span>
+          </ArticleHeader.Eyebrow>
+
+          <ArticleHeader.Title>{post.title}</ArticleHeader.Title>
+
+          <ArticleHeader.Subtitle>
+            You already understand trees, identity, and expensive updates. Let’s
+            use that intuition to see what a computer sees: addresses, bytes,
+            alignment, and one surprisingly useful lie.
+          </ArticleHeader.Subtitle>
+
+          <ArticleHeader.Details>
+            <ArticleHeader.Writer
+              imageSrc="/profile-photo.webp"
+              name="Werberth Lins"
+              role="Lead SWE · Web to systems"
+            />
+            <ArticleHeader.Metadata>
+              <ArticleHeader.Date dateTime={post.publishedTime}>
+                {post.date}
+              </ArticleHeader.Date>
+              <ArticleHeader.ReadingTime>
+                {post.readingTime}
+              </ArticleHeader.ReadingTime>
+              <ArticleHeader.Badge>{post.status}</ArticleHeader.Badge>
+            </ArticleHeader.Metadata>
+          </ArticleHeader.Details>
+
+          <ArticleHeader.Extra>
             <ArticleAlert
-              className="mt-10"
+              className="my-0"
               title="WORKBENCH SHOWCASE"
               variant="note"
             >
@@ -238,8 +201,8 @@ export default function MemoryLayoutArticle() {
               browser-local code notebooks, reusable article components, and
               custom technical visualizations.
             </ArticleAlert>
-          </ContentFrame>
-        </header>
+          </ArticleHeader.Extra>
+        </ArticleHeader>
 
         <ContentFrame
           className="grid grid-cols-1 px-5 pt-12 pb-24 md:grid-cols-[150px_minmax(0,1fr)_minmax(0,1fr)] md:gap-8 md:px-8 md:pt-16 xl:grid-cols-[180px_minmax(0,1fr)_minmax(0,1fr)] xl:gap-12 xl:px-10 2xl:grid-cols-[180px_minmax(0,820px)_180px] 2xl:justify-center"
@@ -249,18 +212,24 @@ export default function MemoryLayoutArticle() {
 
           <div
             className={cn(
-              'prose min-w-0 text-[17px] leading-[1.82] text-(--ink) md:col-start-2 md:col-end-4 md:text-[18px] 2xl:col-end-3 [&>blockquote]:my-12 [&>blockquote]:-mx-10 [&>blockquote]:py-10 [&>blockquote]:leading-tight [&>p]:mb-8 [&>p:last-child]:mb-0 [&>pre]:my-10 [&>pre]:p-8 [&>ul]:my-9 [&>ul]:p-0 [&_li]:py-3 [&_li]:pl-6 max-md:[&>blockquote]:mx-0',
+              'prose min-w-0 text-[17px] leading-[1.82] text-(--ink) md:col-start-2 md:col-end-4 md:text-[18px] 2xl:col-end-3 [&>blockquote]:my-12 [&>blockquote]:py-8 [&>blockquote]:leading-tight [&>p]:mb-8 [&>p:last-child]:mb-0 [&>pre]:my-10 [&>pre]:p-8 [&>ul]:my-9 [&>ul]:p-0 [&_li]:py-3 [&_li]:pl-6 max-md:[&>blockquote]:mx-0',
               styles.prose,
             )}
           >
             <PostContent />
 
             <ArticleNextNavigation
-              upcoming={{
-                description:
-                  'Ownership through the lens of component boundaries, shared state, and the bugs we have learned to tolerate.',
-                title: 'The borrow checker is a design reviewer.',
-              }}
+              next={nextNavigation}
+              previous={previousNavigation}
+              upcoming={
+                next
+                  ? undefined
+                  : {
+                      description:
+                        'Ownership through the lens of component boundaries, shared state, and the bugs we have learned to tolerate.',
+                      title: 'The borrow checker is a design reviewer.',
+                    }
+              }
             />
           </div>
         </ContentFrame>

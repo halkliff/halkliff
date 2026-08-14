@@ -8,6 +8,7 @@ import { BlogBackLink } from "./BlogBackLink";
 export interface ArticleNavigationItem {
   description?: string;
   href: string;
+  readingTime: string;
   title: string;
 }
 
@@ -48,6 +49,9 @@ function ArticleLink({ direction, item }: {
               {item.description}
             </Typography>
           ) : null}
+          <Typography as="span" className="mt-3 block text-[10px] tracking-[0.1em] text-[var(--muted)] uppercase" variant="codeLabel">
+            {item.readingTime}
+          </Typography>
         </span>
         {!isPrevious ? <ArrowRight aria-hidden="true" className="ml-auto size-4 shrink-0" /> : null}
       </Link>

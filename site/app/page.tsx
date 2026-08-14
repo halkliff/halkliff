@@ -21,6 +21,7 @@ import { SectionKicker } from './components/site/SectionKicker';
 import { SocialLinks } from './components/site/SocialLinks';
 import { ContentFrame } from './components/site/ContentFrame';
 import { Typography } from './components/ui/typography';
+import { fieldNotes } from './(blog)/components/field-notes';
 
 const actionButtonVariants = cva(
   'inline-flex min-h-12 w-full items-center justify-between gap-7 px-4 font-[var(--font-mono)] text-[11px] font-[650] uppercase tracking-[0.06em] transition-[transform,background-color,color] duration-150 hover:-translate-y-0.5 min-[761px]:w-auto',
@@ -37,16 +38,18 @@ const actionButtonVariants = cva(
   },
 );
 
-const notes = [
-  {
-    index: '01',
-    tag: 'MEMORY',
-    title: 'Memory layout for React developers',
-    excerpt:
-      'A visual bridge from component trees to bytes, alignment, and the cost of pretending memory is abstract.',
-    meta: '12 min · Interactive',
-    href: '/blog/memory-layout-for-react-devs',
-  },
+// The notes array is a combination of the first two published notes and the planned notes.
+// This allows for a preview of upcoming content while still showcasing existing work.
+const publishedNotes = fieldNotes.slice(0, 3).map((note) => ({
+  index: String(note.order).padStart(2, '0'),
+  tag: note.category.split('/')[0]?.trim() || note.category,
+  title: note.title,
+  excerpt: note.description,
+  meta: `${note.readingTime} · ${note.showcase ? 'Interactive' : note.status}`,
+  href: note.slug,
+}));
+
+const plannedNotes = [
   {
     index: '02',
     tag: 'RUST',
@@ -68,6 +71,15 @@ const notes = [
     disabled: true,
   },
 ];
+
+const notes = [...publishedNotes, ...plannedNotes];
+
+const workbenchQuickOpenNotes = fieldNotes.map((note) => ({
+  order: note.order,
+  slug: note.slug,
+  title: note.title,
+  readingTime: note.readingTime,
+}));
 
 const experience = [
   {
@@ -433,7 +445,7 @@ export default function Home() {
           left="01. THE WORKBENCH"
           right="INTERACTIVE / TRY THE CONTROLS"
         />
-        <Workbench />
+        <Workbench quickOpenNotes={workbenchQuickOpenNotes} />
       </section>
 
       <section

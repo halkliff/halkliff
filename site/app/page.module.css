@@ -1,0 +1,110 @@
+/* Homepage-only visual effects and the recruiter-friendly view state. */
+:global(html[data-view-mode="simple"]) :global(.workbench-section),
+:global(html[data-view-mode="simple"]) :global(.button-ghost) {
+  display: none;
+}
+
+:global(html[data-view-mode="simple"]) :global(.button-simple) {
+  display: inline-flex;
+}
+
+.hero::before {
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 86%);
+  opacity: 0.35;
+  pointer-events: none;
+  position: absolute;
+}
+
+:global(html[data-view-mode="simple"]) .hero::before,
+:global(html[data-view-mode="simple"]) :global(.hero-grid-label) {
+  display: none;
+}
+
+:global(html[data-view-mode="simple"]) .hero h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.98;
+}
+
+:global(html[data-view-mode="simple"]) .hero h1 span {
+  color: var(--acid);
+  font-style: normal;
+  font-weight: 520;
+  margin-top: 0;
+  -webkit-text-stroke: 0;
+}
+
+:global(html[data-view-mode="simple"]) :global(.hero-intro) {
+  max-width: 42rem;
+}
+
+:global(html[data-view-mode="simple"]) :global(.button-primary) {
+  background: var(--ink);
+}
+
+:global(html[data-view-mode="simple"]) :global(.social-dock) {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 0.75rem;
+}
+
+:global(html[data-view-mode="simple"]) :global(.social-dock-label) {
+  padding: 0.125rem 0.25rem 0.625rem;
+}
+
+:global(html[data-view-mode="simple"]) :global(.social-dock) a:first-child {
+  padding-left: 0.75rem;
+}
+
+:global(html[data-view-mode="simple"]) :global(.writing-section) {
+  background: var(--surface-muted);
+}
+
+:global(html[data-view-mode="simple"]) :global(.experience-section) {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+
+:global(html[data-view-mode="simple"]) :global(.projects-section) {
+  background: var(--surface-muted);
+  color: var(--ink);
+}
+
+:global(html[data-view-mode="simple"]) :global(.projects-heading) > p,
+:global(html[data-view-mode="simple"]) :global(.project-card) > strong,
+:global(html[data-view-mode="simple"]) :global(.project-card) > p,
+:global(html[data-view-mode="simple"]) :global(.project-card-top) {
+  color: var(--muted);
+}
+
+:global(html[data-view-mode="simple"]) :global(.project-card) {
+  border-color: rgba(23, 25, 22, 0.18);
+}
+
+:global(html[data-view-mode="simple"]) :global(.project-glyph) {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+:global(html[data-view-mode="simple"]) :global(.project-tags) span {
+  border-color: rgba(23, 25, 22, 0.25);
+  color: var(--muted);
+}
+
+:global(html[data-view-mode="simple"]) :global(.principles-section) {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+}
+
+:global(html[data-view-mode="simple"]) :global(.principles-section) :global(.section-kicker) {
+  color: #75786f;
+}
+
+:global(html[data-view-mode="simple"]) :global(.principles-grid) article {
+  min-height: 18.75rem;
+}

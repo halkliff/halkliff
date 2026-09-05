@@ -1,0 +1,140 @@
+import { AlignmentDiagram } from './AlignmentDiagram';
+import { MemoryInspector } from './MemoryInspector';
+import { Typography } from '@/app/components/ui/typography';
+
+export const temperaturesNotebook = `const temperatures: number[] = [18, 21, 23, 19];
+const bytesPerReading = Uint16Array.BYTES_PER_ELEMENT;
+
+console.log({
+readings: temperatures.length,
+payloadBytes: temperatures.length \* bytesPerReading,
+});`;
+
+export const alignmentNotebook = `from ctypes import Structure, c_uint8, c_uint32, sizeof
+
+class Packet(Structure):
+_fields_ = [("tag", c_uint8), ("value", c_uint32)]
+
+print(f"payload: 5 bytes, aligned size: {sizeof(Packet)} bytes")`;
+
+<Typography
+  as="div"
+  className="prose-lead [&>p]:m-0 [&>p]:text-xl [&>p]:leading-relaxed [&>p]:text-muted-foreground"
+  variant="articleLead"
+>
+  JavaScript does an excellent job of letting you forget that memory exists.
+  That is a feature. It is also why the first week of Rust can feel like someone
+  turned the lights on in a messy storage room.
+</Typography>
+
+In React, you manipulate values: objects, arrays, props, state. You care about
+their identity and shape, but rarely their physical location. Underneath, every
+value eventually becomes bytes stored at addresses. Systems languages simply
+make that layer part of the conversation.
+
+<ArticleHeading
+  id="abstraction"
+  index="01"
+>
+  The useful lie
+</ArticleHeading>
+
+Consider a familiar list. In JavaScript, the interesting question is usually:<br />
+_what are its values?_
+
+```ts
+const temperatures = [18, 21, 23, 19];
+```
+
+<CodeNotebook
+  title="Count the bytes"
+  description="Edit the values, then run this TypeScript locally in your browser."
+  language="typescript"
+  initialSource={temperaturesNotebook}
+/>
+
+<br />
+
+In Rust, the type gives us another useful fact. `[u16; 4]` tells us there are
+four elements and every element consumes two bytes. The payload is eight
+consecutive bytes—no detective work required.
+
+<ArticleAlert
+  title="The bridge"
+  variant="info"
+>
+  A React element describes what should exist. A type like `[u16; 4]` also
+  describes how its data can exist in memory.
+</ArticleAlert>
+
+<ArticleHeading
+  id="contiguous"
+  index="02"
+>
+  Contiguous means close
+</ArticleHeading>
+
+An array's elements sit next to each other. If the first byte starts at address
+`0x1000`, the next byte is at `0x1001`. That sounds almost too obvious to
+mention. It is, however, the foundation of fast iteration and predictable
+access.
+
+<MemoryInspector />
+
+The processor benefits because fetching one location often brings nearby data
+into cache. Walking a compact array is like reading books arranged on one shelf.
+Chasing pointers is more like following a scavenger hunt across the library.
+
+<ArticleHeading
+  id="alignment"
+  index="03"
+>
+  Alignment: the invisible grid
+</ArticleHeading>
+
+Many values prefer addresses divisible by a particular number. A `u32`, for
+example, typically wants a four-byte boundary. When fields do not line up, the
+compiler may insert unused bytes called **padding**.
+
+<AlignmentDiagram />
+
+<CodeNotebook
+  title="Ask Python about padding"
+  description="This cell loads its Python runtime only when it approaches the viewport."
+  language="python"
+  initialSource={alignmentNotebook}
+/>
+
+This is not waste caused by a lazy compiler. Alignment lets the machine read
+values efficiently and, on some architectures, safely. Rearranging fields can
+sometimes reduce padding—but doing so blindly can make an API worse to save a
+handful of bytes.
+
+<Typography
+  as="blockquote"
+  variant="pullQuote"
+>
+  Systems work is not “optimize everything.” It is knowing which costs exist,
+  then choosing the ones your design can afford.
+</Typography>
+
+<ArticleHeading
+  id="react"
+  index="04"
+>
+  Back to React
+</ArticleHeading>
+
+None of this means you should start estimating object padding during a code
+review. It gives you a sharper model for the moments where JavaScript touches a
+lower layer:
+
+- **Typed arrays** make element size and contiguous storage explicit.
+- **GPU buffers** demand exact layouts because shaders cannot guess what your
+  objects meant.
+- **Serialization** turns friendly values into a byte contract another system
+  can understand.
+
+React and Rust are not rival worldviews. They are tools working at different
+distances from the machine. Learning the lower layer does not make the upper one
+less valuable. It makes the abstraction visible—and therefore easier to trust.

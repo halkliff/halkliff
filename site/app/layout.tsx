@@ -19,6 +19,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
+  icons: {
+    icon: "/favicon.ico",
+  },
   title: {
     default: "Halk — Web Developer → Systems Engineer",
     template: "%s — Halk",

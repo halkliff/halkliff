@@ -28,7 +28,7 @@ export const socialLinks = [
   {
     label: 'Email',
     handle: 'Say hello',
-    href: 'mailto:halkliff@pm.me',
+    href: 'mailto:me@halkliff.dev',
     icon: Mail,
     ariaLabel: 'Email Werberth',
   },

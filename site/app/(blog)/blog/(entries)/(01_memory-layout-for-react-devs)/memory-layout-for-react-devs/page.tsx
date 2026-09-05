@@ -6,6 +6,7 @@ import { ArticleHeader } from '@/app/(blog)/components/ArticleHeader';
 import { ArticleNextNavigation } from '@/app/(blog)/components/ArticleNextNavigation';
 import { ArticleTableOfContents } from '@/app/(blog)/components/ArticleTableOfContents';
 import { ArticleAlert } from '@/app/(blog)/components/ArticleAlert';
+import type { BlogPostMetadata } from '@/app/(blog)/components/blog-post-metadata';
 import { cn } from '@/lib/utils';
 import { countMdxWords, formatReadingTime } from '@/lib/reading-time';
 import { absoluteUrl, serializeJsonLd } from '@/lib/site';
@@ -42,7 +43,7 @@ export const post = {
   tags: ['React', 'JavaScript', 'Rust', 'Memory', 'Systems engineering'],
   wordCount: articleWordCount,
   readingTime: formatReadingTime(articleWordCount),
-} as const;
+} as const satisfies BlogPostMetadata;
 
 const publicPath = `/blog/${post.slug}`;
 

@@ -1,19 +1,11 @@
 import { blogEntries } from "./blog-entry-manifest";
+import type { BlogPostMetadata } from "./blog-post-metadata";
 import { getFieldNoteNavigationFromNotes } from "./field-note-navigation";
 
-export interface FieldNote {
-  order: number;
+/** A published post after its bare slug has been turned into a site URL. */
+export interface FieldNote extends BlogPostMetadata {
+  /** Absolute site path, unlike `BlogPostMetadata.slug`. */
   slug: string;
-  title: string;
-  description: string;
-  date: string;
-  publishedTime: string;
-  category: string;
-  status: string;
-  tags: readonly string[];
-  wordCount: number;
-  readingTime: string;
-  showcase: boolean;
 }
 
 /**

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { X } from 'lucide-react';
 import {
   AlertDialog,
@@ -16,36 +17,26 @@ import { Typography } from './ui/typography';
 function CleoCardBody({ close }: { close: () => void }) {
   return (
     <>
-      <span
-        aria-label="Future photo of Cleo"
-        className="flex aspect-square flex-col items-center justify-center border border-dashed border-[#697276] font-(--font-mono) text-[8px] tracking-[0.08em] text-[#9ca7aa]"
-      >
-        <Typography
-          as="span"
-          className="text-[8px] tracking-[0.08em] text-[#9ca7aa]"
-          variant="codeLabel"
-        >
-          PHOTO
-        </Typography>
-        <Typography
-          as="small"
-          className="text-[7px]"
-          variant="caption"
-        >
-          SLOT
-        </Typography>
+      <span className="relative block aspect-square overflow-hidden border border-(--dark-line)">
+        <Image
+          alt="Cleo, a Shih-Tzu with a pink bow, sitting in the grass"
+          className="object-cover object-[50%_40%]"
+          fill
+          sizes="96px"
+          src="/cleo.webp"
+        />
       </span>
       <span className="block">
         <Typography
           as="strong"
-          className="block font-(--font-sans) text-[11px]"
+          className="block font-(--font-sans) text-[14px] leading-snug"
           variant="body"
         >
           Cleo · Chief Emotional Support Officer
         </Typography>
         <Typography
           as="small"
-          className="mt-1.25 block text-[8px] leading-normal text-[#9ca7aa]"
+          className="mt-2 block text-[11px] leading-normal text-[#9ca7aa]"
           variant="caption"
         >
           The real manager, keeper of the treat-for-commits system, and a
@@ -60,7 +51,7 @@ function CleoCardBody({ close }: { close: () => void }) {
       >
         <X
           aria-hidden="true"
-          className="size-4"
+          className="size-5"
         />
       </button>
     </>
@@ -91,12 +82,12 @@ export function CleoEgg() {
             className="cursor-pointer border-0 border-b border-dashed border-current bg-transparent p-0 pb-px font-inherit text-inherit hover:text-(--acid) [aria-expanded='true']:text-(--acid)"
             type="button"
           >
-            Chief Emotional Support Officer
+            Chief Emotional Support Officer 🌒👅🌘
           </button>
         </HoverCardTrigger>
         <HoverCardContent
           aria-label="About Cleo"
-          className="grid w-85 grid-cols-[64px_1fr_auto] items-center gap-3 border border-(--dark-line) bg-(--dark-bg) p-3 text-left text-(--dark-fg) shadow-[0_22px_70px_rgba(0,0,0,0.35)] absolute left-0 top-[calc(100%+10px)] z-20 max-md:hidden"
+          className="grid w-110 max-w-[calc(100vw-32px)] grid-cols-[96px_1fr_auto] items-center gap-4 border border-(--dark-line) bg-(--dark-bg) p-4 text-left text-(--dark-fg) shadow-[0_22px_70px_rgba(0,0,0,0.35)] absolute left-0 top-[calc(100%+10px)] z-20 max-md:hidden"
         >
           <CleoCardBody close={() => setOpen(false)} />
         </HoverCardContent>
@@ -112,24 +103,14 @@ export function CleoEgg() {
           className="fixed left-1/2 top-1/2 grid w-[min(360px,calc(100vw-32px))] max-w-[calc(100vw-32px)] -translate-x-1/2 -translate-y-1/2 grid-cols-1 items-stretch gap-3.5 border border-(--dark-line) bg-(--dark-bg) p-4 text-left text-(--dark-fg) shadow-[0_22px_70px_rgba(0,0,0,0.35)] max-md:gap-3.5 z-1"
           overlayClassName="hidden max-md:block"
         >
-          <span
-            aria-label="Future photo of Cleo"
-            className="flex aspect-4/3 w-full flex-col items-center justify-center border border-dashed border-[#697276] font-(--font-mono) text-[8px] tracking-[0.08em] text-[#9ca7aa]"
-          >
-            <Typography
-              as="span"
-              className="text-[8px] tracking-[0.08em] text-[#9ca7aa]"
-              variant="codeLabel"
-            >
-              PHOTO
-            </Typography>
-            <Typography
-              as="small"
-              className="text-[7px]"
-              variant="caption"
-            >
-              SLOT
-            </Typography>
+          <span className="relative block aspect-4/3 w-full overflow-hidden border border-(--dark-line)">
+            <Image
+              alt="Cleo, a Shih-Tzu with a pink bow, sitting in the grass"
+              className="object-cover object-[50%_40%]"
+              fill
+              sizes="(max-width: 392px) calc(100vw - 66px), 326px"
+              src="/cleo.webp"
+            />
           </span>
           <AlertDialogHeader className="grid gap-1.5 pr-4.5">
             <AlertDialogTitle
@@ -148,11 +129,11 @@ export function CleoEgg() {
           </AlertDialogHeader>
           <AlertDialogCancel
             aria-label="Close Cleo profile"
-            className="absolute right-3 top-2.5 cursor-pointer border-0 bg-transparent p-0 text-[17px] text-[#9ca7aa]"
+            className="absolute right-6 top-6 z-10 flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-[#10171b] p-0 text-white shadow-md hover:bg-[#263238] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#10171b]"
           >
             <X
               aria-hidden="true"
-              className="size-4"
+              className="size-5"
             />
           </AlertDialogCancel>
         </AlertDialogContent>

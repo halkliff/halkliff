@@ -51,28 +51,28 @@ const publishedNotes = fieldNotes.slice(0, 3).map((note) => ({
 
 const plannedNotes = [
   {
-    index: '02',
-    tag: 'RUST',
-    title: 'The borrow checker is a design reviewer',
+    tag: 'PERFORMANCE',
+    title: 'Congratulations! Your abstraction is on the hot path.',
     excerpt:
       'What frontend architecture taught me about ownership—and what Rust made impossible to ignore.',
-    meta: 'Draft · 8 min',
+    meta: 'Field note · Soon',
     href: '#up-next',
     disabled: true,
   },
   {
-    index: '03',
-    tag: 'ENGINE',
-    title: 'Building the renderer before the engine',
-    excerpt:
-      'Notes from designing a hardware-facing graphics layer without leaking the game world into it.',
+    tag: 'SOON',
+    title: 'Coming soon to a field note near you.',
+    excerpt: 'Stay tuned for the next installment in the field notes series.',
     meta: 'Field note · Soon',
     href: '#up-next',
     disabled: true,
   },
 ];
 
-const notes = [...publishedNotes, ...plannedNotes];
+const notes = [...publishedNotes, ...plannedNotes].map((note, index) => ({
+  ...note,
+  index: 'index' in note ? note.index : String(index + 1).padStart(2, '0'),
+}));
 
 const workbenchQuickOpenNotes = fieldNotes.map((note) => ({
   order: note.order,
@@ -230,7 +230,7 @@ export default function Home() {
           </figure>
           <Typography
             as="p"
-            className="mb-6 text-[11px] font-semibold tracking-[0.14em] before:mr-2.5 before:inline-block before:size-[7px] before:bg-[var(--ink)] before:content-['']"
+            className="mb-6 text-[11px] font-semibold tracking-[0.14em] before:mr-2.5 before:inline-block before:size-2 before:bg-(--ink) before:content-['']"
             variant="codeLabel"
           >
             LEAD SWE · WEB → SYSTEMS
@@ -326,7 +326,7 @@ export default function Home() {
                 className="m-0 [&>b]:mx-1.25 [&>b]:font-normal [&>b]:text-[#8b8e85] dark:[&>b]:text-[#687278]"
                 variant="body"
               >
-                <span className="mr-2 inline-block whitespace-nowrap border border-[var(--line)] px-1.5 py-1 font-[var(--font-mono)] text-[7px] tracking-[0.1em]">
+                <span className="mr-2 inline-block whitespace-nowrap border border-[var(--line)] px-1.5 py-1 font-(--font-mono) text-[7px] tracking-[0.1em]">
                   THE SHORT VERSION
                 </span>
                 Software Engineer <b>•</b> Game Engine enthusiast <b>•</b> Chief
@@ -335,7 +335,7 @@ export default function Home() {
               </Typography>
               <Typography
                 as="div"
-                className="mt-3 text-[12px] tracking-[0.025em] text-[var(--muted)] max-md:text-[14px] max-md:leading-[1.5]"
+                className="mt-3 text-[12px] tracking-[0.025em] text-muted max-md:text-[14px] max-md:leading-normal"
                 variant="code"
               >
                 No coffee. This operation runs on water, strict sleep, and our{' '}
@@ -347,7 +347,7 @@ export default function Home() {
         <div className="hero-lower-band contents max-lg:col-start-2 max-lg:row-start-2 max-lg:grid max-lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)] max-lg:items-start max-lg:gap-8 max-md:block">
           <div
             aria-label="Find Werberth online"
-            className="social-dock relative z-1 col-start-2 row-start-2 mt-8 max-w-190 max-lg:col-auto max-lg:row-auto max-lg:mt-10 max-lg:max-w-none"
+            className="social-dock relative col-start-2 row-start-2 mt-8 max-w-190 max-lg:col-auto max-lg:row-auto max-lg:mt-10 max-lg:max-w-none"
           >
             <Typography
               as="span"
@@ -360,7 +360,7 @@ export default function Home() {
           </div>
           <aside
             aria-label="Current focus"
-            className="hero-manifest relative z-[1] col-start-3 row-span-2 row-start-1 mb-5 w-full self-end border-l border-[var(--line)] pl-6 max-lg:col-auto max-lg:row-auto max-lg:mt-10 max-lg:max-w-none max-lg:self-start max-md:border-l-0 max-md:border-t max-md:pl-0 max-md:pt-6"
+            className="hero-manifest relative col-start-3 row-span-2 row-start-1 mb-5 w-full self-end border-l border-(--line) pl-6 max-lg:col-auto max-lg:row-auto max-lg:mt-10 max-lg:max-w-none max-lg:self-start max-md:border-l-0 max-md:border-t max-md:pl-0 max-md:pt-6"
           >
             <Typography
               as="p"
@@ -375,18 +375,18 @@ export default function Home() {
               variant="codeLabel"
             >
               <span>WEB</span>
-              <i className="mx-1.5 h-px w-5 bg-[var(--ink)] opacity-[0.36]" />
+              <i className="mx-1.5 h-px w-5 bg-(--ink) opacity-[0.36]" />
               <span>CLOUD</span>
-              <i className="mx-1.5 h-px w-5 bg-[var(--ink)] opacity-[0.36]" />
+              <i className="mx-1.5 h-px w-5 bg-(--ink) opacity-[0.36]" />
               <span>RUST</span>
-              <i className="mx-1.5 h-px w-5 bg-[var(--ink)] opacity-[0.36]" />
+              <i className="mx-1.5 h-px w-5 bg-(--ink) opacity-[0.36]" />
               <span>SYSTEMS</span>
             </Typography>
             <dl className="m-0">
-              <div className="grid grid-cols-[86px_1fr] gap-2 border-t border-[var(--line)] py-3">
+              <div className="grid grid-cols-[86px_1fr] gap-2 border-t border-(--line) py-3">
                 <Typography
                   as="dt"
-                  className="text-[9px] tracking-[0.08em] text-[var(--muted)]"
+                  className="text-[9px] tracking-[0.08em] text-muted"
                   variant="codeLabel"
                 >
                   STATUS
@@ -399,7 +399,7 @@ export default function Home() {
                   Compiling a tiny engine
                 </Typography>
               </div>
-              <div className="grid grid-cols-[86px_1fr] gap-2 border-t border-[var(--line)] py-3">
+              <div className="grid grid-cols-[86px_1fr] gap-2 border-t border-(--line) py-3">
                 <Typography
                   as="dt"
                   className="text-[9px] tracking-[0.08em] text-muted"
@@ -587,9 +587,9 @@ export default function Home() {
         </ContentFrame>
       </section>
 
-      <footer className="bg-(--dark-bg) px-[clamp(20px,6vw,92px)] pb-[30px] pt-[clamp(80px,10vw,140px)] text-[var(--dark-fg)]">
+      <footer className="bg-(--dark-bg) px-[clamp(20px,6vw,92px)] pb-8 pt-[clamp(80px,10vw,140px)] text-(--dark-fg)">
         <ContentFrame>
-          <div className="border-b border-[var(--dark-line)] pb-[72px]">
+          <div className="border-b border-(--dark-line) pb-18">
             <Typography
               as="p"
               className="mb-4 text-[10px] uppercase tracking-[0.08em] text-[#969b91]"
@@ -599,8 +599,8 @@ export default function Home() {
             </Typography>
             <ContactCta />
           </div>
-          <div className="grid grid-cols-2 py-[54px] pb-[76px] max-md:block">
-            <div className="border-l-0 px-0 max-md:border-t max-md:border-[var(--dark-line)] max-md:py-6">
+          <div className="grid grid-cols-2 py-14 pb-19 max-md:block">
+            <div className="border-l-0 px-0 max-md:border-t max-md:border-(--dark-line) max-md:py-6">
               <Typography
                 as="span"
                 className="mb-3 block text-[8px] tracking-[0.11em] text-[#777d73]"
@@ -616,7 +616,7 @@ export default function Home() {
                 Water + 8.0 hrs of sleep (Strict). No coffee.
               </Typography>
             </div>
-            <div className="border-l border-[var(--dark-line)] px-[26px] max-md:border-l-0 max-md:border-t max-md:px-0 max-md:py-6">
+            <div className="border-l border-(--dark-line) px-7 max-md:border-l-0 max-md:border-t max-md:px-0 max-md:py-6">
               <Typography
                 as="span"
                 className="mb-3 block text-[8px] tracking-[0.11em] text-[#777d73]"
@@ -633,7 +633,7 @@ export default function Home() {
               </Typography>
             </div>
           </div>
-          <div className="mb-[26px] grid grid-cols-2 gap-9 border-y border-[var(--dark-line)] py-6 max-md:block">
+          <div className="mb-7 grid grid-cols-2 gap-9 border-y border-(--dark-line) py-6 max-md:block">
             <div className="flex items-center gap-5 max-md:justify-between max-md:py-2.5">
               <Typography
                 as="span"
@@ -651,7 +651,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center border-t border-[var(--dark-line)] pt-6 text-[#767b72] max-md:block">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center border-t border-(--dark-line) pt-6 text-[#767b72] max-md:block">
             <Typography
               as="span"
               className="text-[8px] leading-normal tracking-[0.08em]"

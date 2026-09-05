@@ -22,15 +22,15 @@ print(f"payload: 5 bytes, aligned size: {sizeof(Packet)} bytes")`;
   className="prose-lead [&>p]:m-0 [&>p]:text-xl [&>p]:leading-relaxed [&>p]:text-muted-foreground"
   variant="articleLead"
 >
-  JavaScript does an excellent job of letting you forget that memory exists.
-  That is a feature. It is also why the first week of Rust can feel like someone
+  JavaScript lets you forget how values are laid out in memory.
+  That is useful. It is also why the first week of Rust can feel like someone
   turned the lights on in a messy storage room.
 </Typography>
 
 In React, you manipulate values: objects, arrays, props, state. You care about
 their identity and shape, but rarely their physical location. Underneath, every
-value eventually becomes bytes stored at addresses. Systems languages simply
-make that layer part of the conversation.
+value is represented by bytes in memory. Systems languages expose more of
+those details.
 
 <ArticleHeading
   id="abstraction"
@@ -39,8 +39,7 @@ make that layer part of the conversation.
   The useful lie
 </ArticleHeading>
 
-Consider a familiar list. In JavaScript, the interesting question is usually:<br />
-_what are its values?_
+Consider a familiar list. In JavaScript, you usually care about its values:<br />
 
 ```ts
 const temperatures = [18, 21, 23, 19];
@@ -57,7 +56,7 @@ const temperatures = [18, 21, 23, 19];
 
 In Rust, the type gives us another useful fact. `[u16; 4]` tells us there are
 four elements and every element consumes two bytes. The payload is eight
-consecutive bytes—no detective work required.
+consecutive bytes. No detective work required.
 
 <ArticleAlert
   title="The bridge"
@@ -75,9 +74,8 @@ consecutive bytes—no detective work required.
 </ArticleHeading>
 
 An array's elements sit next to each other. If the first byte starts at address
-`0x1000`, the next byte is at `0x1001`. That sounds almost too obvious to
-mention. It is, however, the foundation of fast iteration and predictable
-access.
+`0x1000`, the next byte is at `0x1001`. This makes the addresses predictable
+when iterating through the array.
 
 <MemoryInspector />
 
@@ -100,14 +98,14 @@ compiler may insert unused bytes called **padding**.
 
 <CodeNotebook
   title="Ask Python about padding"
-  description="This cell loads its Python runtime only when it approaches the viewport."
+  description="Run this Python example to see how much space the fields occupy with padding."
   language="python"
   initialSource={alignmentNotebook}
 />
 
 This is not waste caused by a lazy compiler. Alignment lets the machine read
 values efficiently and, on some architectures, safely. Rearranging fields can
-sometimes reduce padding—but doing so blindly can make an API worse to save a
+sometimes reduce padding. Doing so blindly can make an API worse to save a
 handful of bytes.
 
 <Typography
@@ -125,16 +123,13 @@ handful of bytes.
   Back to React
 </ArticleHeading>
 
-None of this means you should start estimating object padding during a code
-review. It gives you a sharper model for the moments where JavaScript touches a
-lower layer:
+These layout details matter when JavaScript exchanges data with a lower layer:
 
 - **Typed arrays** make element size and contiguous storage explicit.
 - **GPU buffers** demand exact layouts because shaders cannot guess what your
   objects meant.
-- **Serialization** turns friendly values into a byte contract another system
-  can understand.
+- **Serialization** encodes values in a byte format another system can read.
 
-React and Rust are not rival worldviews. They are tools working at different
-distances from the machine. Learning the lower layer does not make the upper one
-less valuable. It makes the abstraction visible—and therefore easier to trust.
+React handles UI composition. Rust gives you more control over memory layout.
+Understanding that layout helps when you pass data between JavaScript and
+systems code.

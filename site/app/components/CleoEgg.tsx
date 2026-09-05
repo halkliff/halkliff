@@ -39,8 +39,8 @@ function CleoCardBody({ close }: { close: () => void }) {
           className="mt-2 block text-[11px] leading-normal text-[#9ca7aa]"
           variant="caption"
         >
-          The real manager, keeper of the treat-for-commits system, and a
-          reliable source of chaotic energy.
+          The real manager, yet terrified of her own shadow. Enforces the
+          treat-for-commits policy anyway.
         </Typography>
       </span>
       <button
@@ -123,8 +123,8 @@ export function CleoEgg() {
               className="m-0 text-[11px] leading-normal text-[#9ca7aa]"
               id="cleo-mobile-description"
             >
-              The real manager, keeper of the treat-for-commits system, and a
-              reliable source of chaotic energy.
+              The real manager, yet terrified of her own shadow. Enforces the
+          treat-for-commits policy anyway.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogCancel

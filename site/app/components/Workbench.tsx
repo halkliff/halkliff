@@ -21,6 +21,7 @@ import {
 } from './ui/sidebar';
 import { Kbd, KbdShortcut, useKeyboardPlatform } from './ui/kbd';
 import { Typography } from './ui/typography';
+import { runWorkbenchCommand, type TerminalSession } from './workbench-terminal';
 import {
   type FormEvent as ReactFormEvent,
   type KeyboardEvent as ReactKeyboardEvent,
@@ -60,6 +61,10 @@ const branchStates = [
   {
     name: 'fix/reality',
     message: 'Reality patched. Tests remain suspiciously green.',
+  },
+  {
+    name: 'chore/engine',
+    message: 'Shaders are not compiling. The triangles look weird. Blaming the quaternions.'
   },
 ];
 
@@ -122,7 +127,7 @@ function DiagnosticsPanel({ className }: { className?: string }) {
           as="span"
           variant="codeLabel"
         >
-          DIAGNOSTICS
+          DEMO DIAGNOSTICS
         </Typography>
         <Typography
           as="small"
@@ -251,6 +256,10 @@ export function Workbench({
   const [branchMessage, setBranchMessage] = useState('');
   const [terminalCommand, setTerminalCommand] = useState('');
   const [terminalEntries, setTerminalEntries] = useState<TerminalEntry[]>([]);
+  const [terminalSession, setTerminalSession] = useState<TerminalSession>({ commits: 0, treats: 0 });
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number | null>(null);
+  const commandDraft = useRef('');
   const [consolePosition, setConsolePosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const terminalBodyRef = useRef<HTMLDivElement | null>(null);
@@ -384,59 +393,41 @@ export function Workbench({
     const command = terminalCommand.trim();
     if (!command) return;
 
-    const normalized = command.toLowerCase();
-    if (normalized === 'clear') {
-      setTerminalEntries([]);
-      setTerminalCommand('');
-      return;
-    }
-
-    let output: string[];
-    let tone: TerminalEntry['tone'] = 'normal';
-
-    switch (normalized) {
-      case 'help':
-        output = ['Try: whoami · quest · coffee · cleo · git status · clear'];
-        break;
-      case 'whoami':
-        output = ['Werberth / Halk — Software Engineer, systems curious.'];
-        break;
-      case 'quest':
-        output = [
-          'Current quest: make ToyEngine render more than suspicious triangles.',
-        ];
-        break;
-      case 'coffee':
-        output = ['coffee: command not found. Water subsystem is healthy.'];
-        break;
-      case 'cleo':
-        output = [
-          'Cleo is hiding upstairs. Her name knows more than it admits.',
-        ];
-        break;
-      case 'git status':
-        output = [
-          'On branch feat/joy',
-          'nothing to commit, curiosity tree clean',
-        ];
-        break;
-      default:
-        output = [`${command}: command not found. Try \`help\`.`];
-        tone = 'error';
-    }
-
-    setTerminalEntries((entries) =>
-      [...entries, { command, output, tone }].slice(-4),
-    );
+    const result = runWorkbenchCommand(command, terminalSession, branchStates[branchIndex].name);
+    setTerminalSession(result.session);
+    setCommandHistory((history) => [...history, command].slice(-50));
+    setHistoryIndex(null);
+    commandDraft.current = '';
+    setTerminalEntries((entries) => result.clear
+      ? []
+      : [...entries, { command, output: result.output, tone: result.tone }].slice(-30));
     setTerminalCommand('');
   }
-
   function runTerminalCommand(event: ReactFormEvent<HTMLFormElement>) {
     event.preventDefault();
     executeTerminalCommand();
   }
 
   function handleTerminalKeyDown(event: ReactKeyboardEvent<HTMLInputElement>) {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (!commandHistory.length) return;
+      if (historyIndex === null) {
+        if (event.key === 'ArrowDown') return;
+        commandDraft.current = terminalCommand;
+      }
+      const nextIndex = event.key === 'ArrowUp'
+        ? Math.max(0, (historyIndex ?? commandHistory.length) - 1)
+        : (historyIndex ?? commandHistory.length) + 1;
+      if (nextIndex >= commandHistory.length) {
+        setHistoryIndex(null);
+        setTerminalCommand(commandDraft.current);
+      } else {
+        setHistoryIndex(nextIndex);
+        setTerminalCommand(commandHistory[nextIndex]);
+      }
+      return;
+    }
     if (event.key !== 'Enter') return;
     event.preventDefault();
     executeTerminalCommand();
@@ -937,7 +928,7 @@ export function Workbench({
         </div>
         <div
           aria-label="Interactive terminal output"
-          className="h-[170px] overflow-y-scroll px-[15px] py-[13px] font-[var(--font-mono)] text-[10px] leading-[1.5] [scrollbar-color:#639ab6_#0d110e] [scrollbar-gutter:stable] [scrollbar-width:thin]"
+          className="h-[240px] overflow-y-scroll break-words px-[15px] py-[13px] font-[var(--font-mono)] text-[12px] leading-[1.6] [scrollbar-color:#639ab6_#0d110e] [scrollbar-gutter:stable] [scrollbar-width:thin]"
           ref={terminalBodyRef}
         >
           <p className="m-[3px_0]">
@@ -983,8 +974,11 @@ export function Workbench({
             <input
               aria-label="Terminal command"
               autoComplete="off"
-              className="min-w-0 flex-1 border-0 bg-transparent px-0 py-[3px] font-[var(--font-mono)] text-[10px] text-[#dfe2d9] outline-none placeholder:text-[#59615a]"
-              onChange={(event) => setTerminalCommand(event.target.value)}
+              className="min-w-0 flex-1 border-0 bg-transparent px-0 py-[3px] font-[var(--font-mono)] text-[12px] text-[#dfe2d9] outline-none placeholder:text-[#59615a]"
+              onChange={(event) => {
+                setTerminalCommand(event.target.value);
+                setHistoryIndex(null);
+              }}
               onKeyDown={handleTerminalKeyDown}
               placeholder="type `help`"
               spellCheck={false}
@@ -1077,7 +1071,7 @@ export function Workbench({
             </a>
             <a
               className="grid grid-cols-[24px_1fr_auto] items-center gap-3 px-[10px] py-3 font-[var(--font-mono)] text-[10px] hover:bg-[#292e29]"
-              href="mailto:halkliff@pm.me"
+              href="mailto:me@halkliff.dev"
             >
               <span className="text-[#676e64]">03</span>
               <Typography

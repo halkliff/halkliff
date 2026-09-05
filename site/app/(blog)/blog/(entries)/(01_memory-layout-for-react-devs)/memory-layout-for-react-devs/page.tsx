@@ -34,7 +34,7 @@ export const post = {
   slug: 'memory-layout-for-react-devs',
   title: 'Memory layout for React developers',
   description:
-    'An AI-written workbench showcase using interactive MDX, local code notebooks, and custom memory visualizations.',
+    'An AI-written test post about memory layout, with interactive diagrams and code you can run in your browser.',
   date: 'JUL 30, 2026',
   publishedTime: '2026-07-30T00:00:00.000Z',
   category: 'MEMORY / SYSTEMS',
@@ -169,9 +169,8 @@ export default async function MemoryLayoutArticle() {
           <ArticleHeader.Title>{post.title}</ArticleHeader.Title>
 
           <ArticleHeader.Subtitle>
-            You already understand trees, identity, and expensive updates. Let’s
-            use that intuition to see what a computer sees: addresses, bytes,
-            alignment, and one surprisingly useful lie.
+            Start with a familiar JavaScript array, then look at element sizes,
+            consecutive addresses, and the padding between fields.
           </ArticleHeader.Subtitle>
 
           <ArticleHeader.Details>
@@ -197,10 +196,9 @@ export default async function MemoryLayoutArticle() {
               title="WORKBENCH SHOWCASE"
               variant="note"
             >
-              This is an AI-written test post—not part of the editorial catalog.
-              It exists to demonstrate the portfolio workbench: interactive MDX,
-              browser-local code notebooks, reusable article components, and
-              custom technical visualizations.
+              This AI-written test post demonstrates the site&apos;s interactive
+              diagrams, code notebooks, and article components. It is a test page
+              outside the editorial catalog.
             </ArticleAlert>
           </ArticleHeader.Extra>
         </ArticleHeader>
@@ -227,8 +225,8 @@ export default async function MemoryLayoutArticle() {
                   ? undefined
                   : {
                       description:
-                        'Ownership through the lens of component boundaries, shared state, and the bugs we have learned to tolerate.',
-                      title: 'The borrow checker is a design reviewer.',
+                        'Abstraction helps us change code. The runtime still has to do the work that survives optimization: allocate, chase pointers, make indirect calls, synchronize, parse again, and copy data.',
+                      title: 'Congratulations! Your abstraction is on the hot path',
                     }
               }
             />

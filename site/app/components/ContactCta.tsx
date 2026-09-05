@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Typography } from "./ui/typography";
 
-const email = "halkliff@pm.me";
+const email = "me@halkliff.dev";
 
 export function ContactCta() {
   const [status, setStatus] = useState("");
@@ -13,7 +13,7 @@ export function ContactCta() {
     setStatus(`Email: ${email}`);
     try {
       await navigator.clipboard?.writeText(email);
-      setStatus(`Copied ${email} — paste it anywhere.`);
+      setStatus(`Copied ${email}. Paste it anywhere, I promise I won't tell anyone.`);
     } catch {
       // The visible address is the fallback when clipboard access is unavailable.
     }
@@ -32,7 +32,7 @@ export function ContactCta() {
           variant="h1"
         >
           <span className="inline-flex items-baseline gap-[0.12em]">
-          Let&apos;s make it boringly clear.
+          Summon the nerd.
           <ArrowUpRight aria-hidden="true" className="inline size-[0.72em] shrink-0" strokeWidth={1.7} />
           </span>
         </Typography>

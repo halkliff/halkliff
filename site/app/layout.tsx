@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s — Halk",
   },
   description:
-    "Werberth Lins builds across the web stack and writes about the road from distributed products to Rust, graphics, and game engines.",
+    "Werberth Lins builds web interfaces and distributed systems, and writes about Rust, graphics, and game engines.",
   authors: [{ name: "Werberth Lins", url: "https://github.com/halkliff" }],
   creator: "Werberth Lins",
   publisher: "Werberth Lins",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Halk — Interface to infrastructure",
     description:
-      "A highly interactive portfolio and field notes from the road between web products and systems engineering.",
+      "Werberth Lins's projects and field notes on web development, Rust, and systems engineering.",
     type: "website",
     url: "/",
     siteName: "Halk — Werberth Lins",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Halk — Interface to infrastructure",
     description:
-      "A highly interactive portfolio and field notes from the road between web products and systems engineering.",
+      "Werberth Lins's projects and field notes on web development, Rust, and systems engineering.",
     creator: "@halkliff",
     images: ["/og.png"],
   },

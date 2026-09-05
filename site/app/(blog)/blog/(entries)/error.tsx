@@ -5,9 +5,9 @@ import { BlogErrorState } from "../../components/BlogErrorState";
 export default function BlogEntryError({ reset }: { reset: () => void }) {
   return (
     <BlogErrorState
-      description="The field note hit an unexpected edge case. The rest of the system is still online."
+      description="Try loading the page again, or return to the field notes."
       reset={reset}
-      title="This note needs a fresh render."
+      title="Could not load this note."
     />
   );
 }

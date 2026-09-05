@@ -9,12 +9,12 @@ import { fieldNotes } from '../components/field-notes';
 export const metadata: Metadata = {
   title: 'Field notes',
   description:
-    'Technical field notes from the road between web products and systems engineering.',
+    'Notes on web development, distributed systems, memory, and systems programming.',
   alternates: { canonical: '/blog' },
   openGraph: {
     title: 'Field notes — Halk',
     description:
-      'Technical field notes from the road between web products and systems engineering.',
+      'Notes on web development, distributed systems, memory, and systems programming.',
     type: 'website',
     url: '/blog',
   },
@@ -48,14 +48,14 @@ export default function BlogIndex() {
             id="field-notes-title"
             variant="display"
           >
-            Field notes for curious systems.
+            Field notes on web and systems programming.
           </Typography>
           <Typography
             className="m-0 max-w-[760px] text-[clamp(20px,2.2vw,30px)] leading-[1.45] text-[var(--muted)] lg:max-w-[980px] lg:text-[34px]"
             variant="deck"
           >
             Long-form notes on interfaces, distributed systems, memory, and the
-            lower layers hiding underneath a good product.
+            lower layers hiding underneath a good architecture.
           </Typography>
         </ContentFrame>
       </section>

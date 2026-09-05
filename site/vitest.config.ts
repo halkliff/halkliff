@@ -21,6 +21,7 @@ export default defineConfig({
       "tests/code-notebook-component.test.tsx",
       "tests/appearance-controls.test.tsx",
       "tests/mdx-components.test.tsx",
+      "tests/workbench-terminal.test.tsx",
     ],
     setupFiles: ["./tests/setup.ts"],
   },

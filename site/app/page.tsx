@@ -54,7 +54,7 @@ const plannedNotes = [
     tag: 'PERFORMANCE',
     title: 'Congratulations! Your abstraction is on the hot path.',
     excerpt:
-      'What frontend architecture taught me about ownership—and what Rust made impossible to ignore.',
+      'Abstraction helps us change code. The runtime still has to do the work that survives optimization: allocate, chase pointers, make indirect calls, synchronize, parse again, and copy data.',
     meta: 'Field note · Soon',
     href: '#up-next',
     disabled: true,
@@ -62,7 +62,7 @@ const plannedNotes = [
   {
     tag: 'SOON',
     title: 'Coming soon to a field note near you.',
-    excerpt: 'Stay tuned for the next installment in the field notes series.',
+    excerpt: 'The next topic is still undecided.',
     meta: 'Field note · Soon',
     href: '#up-next',
     disabled: true,
@@ -103,7 +103,7 @@ const experience = [
     company: 'Moxie',
     role: 'Lead Software Engineer',
     summary:
-      'Led a modern TypeScript, React, Next.js, Python, and GraphQL stack; completed a zero-downtime AWS migration and designed PII protection layers.',
+      'Led development with TypeScript, React, Next.js, Python, and GraphQL; completed a zero-downtime AWS migration and designed PII protection layers.',
     mark: 'LX',
   },
   {
@@ -147,7 +147,7 @@ const projects = [
     title: 'ToyEngine',
     subtitle: 'The game engine I wanted to understand.',
     description:
-      'A work-in-progress Rust engine with a renderer, ECS, editor ambitions, and an unreasonable tolerance for borrow-checker battles.',
+      'A Rust engine in development, with a renderer, ECS, plans for an editor, and an unreasonable tolerance for borrow-checker battles.',
     tags: ['RUST', 'GRAPHICS', 'ENGINE ARCHITECTURE'],
     href: 'https://github.com/halkliff/toy-engine',
   },
@@ -167,7 +167,7 @@ const projects = [
     title: 'EmaProject',
     subtitle: 'An early bot-building time capsule.',
     description:
-      'A multilingual Python Telegram assistant with inline mode, database-backed users, releases, and the charming archaeology of an older codebase.',
+      'A multilingual Python Telegram assistant with inline mode, stored user accounts, and versioned releases. Bring a shovel; this is an older codebase.',
     tags: ['PYTHON', 'TELEGRAM', 'OPEN SOURCE'],
     href: 'https://github.com/halkliff/EmaProject',
   },
@@ -178,19 +178,19 @@ const principles = [
     number: 'I',
     title: 'Make it legible.',
     description:
-      'Complexity is allowed. Confusion is a bug. The interface should teach you how it works before documentation has to.',
+      'Make controls, states, and next steps clear in the interface. Use documentation for what needs more explanation.',
   },
   {
     number: 'II',
     title: 'Measure the boundary.',
     description:
-      'Systems become interesting where abstractions meet: UI and API, application and infrastructure, design intent and implementation cost.',
+      'Measure what crosses the boundary between UI and API, or application and infrastructure. Check the cost of the design in use.',
   },
   {
     number: 'III',
     title: 'Leave evidence.',
     description:
-      'Tests, types, docs, and small commits. Future maintainers deserve an explanation, not an archaeological dig.',
+      'Use tests, types, docs, and small commits to show what changed and why. Future maintainers should not need an excavation permit.',
   },
 ];
 
@@ -221,7 +221,7 @@ export default function Home() {
           <figure className="absolute -right-72 top-3 z-2 m-0 h-82 w-62 overflow-hidden border border-[color-mix(in_srgb,var(--acid)_55%,var(--line))] bg-(--paper) [clip-path:polygon(7%_0,100%_4%,94%_92%,18%_100%,0_74%)] after:pointer-events-none after:absolute after:inset-2.5 after:border after:border-[rgba(255,255,255,0.42)] lg:right-[-300px] lg:h-92 lg:w-70 max-lg:right-0 max-lg:top-7 max-lg:h-64 max-lg:w-52 max-md:relative max-md:right-auto max-md:top-auto [@media(min-width:500px)_and_(max-width:760px)]:-mb-12 max-[500px]:mb-8 max-md:ml-auto max-md:h-70 max-md:w-[62%] max-md:max-w-60">
             <Image
               className="block size-full object-cover [object-position:50%_34%]"
-              alt="A photography depicting Werberth, the author of this website, in a casual pose with a blurred background. The image is cropped to focus on the upper body and face, highlighting a friendly and approachable demeanor."
+              alt="Werberth seated at a table, looking to his left"
               fill
               priority
               sizes="(max-width: 760px) 62vw, 250px"
@@ -258,7 +258,7 @@ export default function Home() {
             className="hero-intro mt-5 max-w-[650px] text-[clamp(17px,1.45vw,22px)] leading-[1.55] tracking-[-0.025em] lg:max-w-[820px] lg:text-[24px] max-lg:max-w-[calc(100%-210px)] max-md:mt-8 max-md:max-w-none max-md:text-base"
             variant="body"
           >
-            I&apos;ve spent 10 years across the whole stack: high-craft UIs,
+            I&apos;ve spent 10 years building UIs,
             APIs, cloud infrastructure, distributed workflows, and
             high-throughput systems. Lately, I&apos;ve been going deeper into
             Rust, graphics, and engine architecture.
@@ -460,7 +460,7 @@ export default function Home() {
           />
           <SectionIntro
             className="experience-heading"
-            description="From typed interfaces to event-driven cloud systems, technical leadership, AI operations, fintech, and memory-safe infrastructure."
+            description="Engineering and team leadership across web applications, cloud systems, AI training, and payments."
             eyebrow="THE WORK, NOT THE BUZZWORDS"
             title="Products that had to work in the real world."
             variant="experience"
@@ -547,7 +547,7 @@ export default function Home() {
         <ContentFrame>
           <SectionIntro
             className="writing-heading"
-            description="Deep dives for curious builders. Plain-language entry points, rigorous endings, and interactive diagrams in between."
+            description="Notes on memory, performance, and systems programming, with code and diagrams you can try."
             eyebrow="FIELD NOTES"
             title="Writing from the layer beneath."
             variant="writing"
@@ -629,7 +629,7 @@ export default function Home() {
                 className="block text-[10px] font-[480]"
                 variant="codeLabel"
               >
-                #![deny(missing_docs)] · CI PASSING
+                #![deny(missing_docs)] · Tests · Types
               </Typography>
             </div>
           </div>
